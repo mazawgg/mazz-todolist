@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER_OS // Main Hub v2.0</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Google Fonts: Fira Code -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body { font-family: 'Fira Code', monospace; }
+        #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.25; }
+    </style>
+</head>
+<body class="bg-black text-emerald-400 min-h-screen flex flex-col items-center justify-center py-10 px-4 relative overflow-x-hidden">
+
+    <!-- Canvas Background Matrix Rain -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Main Hub Container -->
+    <div class="w-full max-w-2xl bg-zinc-950/90 border-2 border-emerald-500/40 rounded-none shadow-[0_0_25px_rgba(16,185,129,0.2)] p-6 md:p-10 relative z-10 backdrop-blur-sm">
+        
+        <!-- System Header -->
+        <header class="mb-8 border-b border-emerald-500/30 pb-4 flex justify-between items-center gap-4">
+            <div>
+                <span class="text-xs text-emerald-600 tracking-widest uppercase">[ROOT_DIRECTORY]</span>
+                <h1 class="text-xl md:text-2xl font-bold tracking-wider text-emerald-300 mt-1">>&nbsp;CYBER_SYSTEM BY MAZAW</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="text-right text-xs text-emerald-600 hidden sm:block">
+                    SYS_STATUS: ACTIVE<br>SEC_LVL: ROOT
+                </div>
+                <button id="logoutBtn" type="button" onclick="logoutSystem()" class="px-3 py-2 border border-emerald-500/50 text-xs text-emerald-300 hover:bg-emerald-500 hover:text-black transition cursor-pointer">
+                    <i class="fa-solid fa-right-from-bracket"></i> LOGOUT
+                </button>
+            </div>
+        </header>
+
+        <!-- Hub Description -->
+        <div class="mb-8 bg-black/60 border border-emerald-500/20 p-4 text-xs text-emerald-400 leading-relaxed">
+            // WELCOME, OPERATOR. Pilih modul sistem di bawah untuk mengakses database manajemen target dan produktivitas harian.
+        </div>
+
+        <!-- Navigation Grid (4 Modul Utama) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- 1. Game Backlog -->
+            <a href="game.html" class="group bg-black border border-emerald-500/40 hover:border-emerald-400 p-5 transition relative flex flex-col justify-between h-36">
+                <div>
+                    <span class="text-xs text-emerald-600">MOD_01</span>
+                    <h2 class="font-bold text-emerald-300 text-base mt-1 group-hover:translate-x-1 transition-transform"><i class="fa-solid fa-gamepad"></i> Game Backlog</h2>
+                </div>
+                <div class="text-xs text-emerald-500/70 group-hover:text-emerald-400 flex items-center justify-between">
+                    <span>STATUS: READY</span>
+                    <span>-> ACCESS</span>
+                </div>
+            </a>
+
+            <!-- 2. Dev Task / Bug Tracker -->
+            <a href="dev.html" class="group bg-black border border-cyan-500/40 hover:border-cyan-400 p-5 transition relative flex flex-col justify-between h-36">
+                <div>
+                    <span class="text-xs text-cyan-600">MOD_02</span>
+                        <h2 class="font-bold text-cyan-300 text-base mt-1 group-hover:translate-x-1 transition-transform"><i class="fa-solid fa-laptop"></i> Dev Task Hub</h2>
+                    </div>
+                <div class="text-xs text-cyan-500/70 group-hover:text-cyan-400 flex items-center justify-between">
+                    <span>STATUS: READY</span>
+                    <span>-> ACCESS</span>
+                </div>
+            </a>
+
+            <!-- 3. Workout Routine -->
+            <a href="workout.html" class="group bg-black border border-pink-500/40 hover:border-pink-400 p-5 transition relative flex flex-col justify-between h-36">
+    <div>
+        <span class="text-xs text-pink-600">MOD_03</span>
+        <h2 class="font-bold text-pink-300 text-base mt-1 group-hover:translate-x-1 transition-transform"><i class="fa-solid fa-dumbbell"></i> Workout Log</h2>
+    </div>
+    <div class="text-xs text-pink-500/70 group-hover:text-pink-400 flex items-center justify-between">
+        <span>STATUS: READY</span>
+        <span>-> ACCESS</span>
+    </div>
+</a>
+
+            <!-- 4. Study Roadmap -->
+            <a href="study.html" class="group bg-black border border-amber-500/40 hover:border-amber-400 p-5 transition relative flex flex-col justify-between h-36">
+                <div>
+                    <span class="text-xs text-amber-600">MOD_04</span>
+                    <h2 class="font-bold text-amber-300 text-base mt-1 group-hover:translate-x-1 transition-transform"><i class="fa-solid fa-book"></i> Study Roadmap</h2>
+                </div>
+                <div class="text-xs text-amber-500/70 group-hover:text-amber-400 flex items-center justify-between">
+                    <span>STATUS: READY</span>
+                    <span>-> ACCESS</span>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Footer Info -->
+        <footer class="mt-8 pt-4 border-t border-emerald-500/20 text-center text-xs text-emerald-700">
+            [ SECURE CONNECTION ESTABLISHED // POWERED BY LOCALSTORAGE ]
+        </footer>
+
+    </div>
+
+    <!-- JavaScript: Matrix Rain Animation -->
+    <script>
+    const AUTH_KEY = 'cyber_user_session';
+    const CURRENT_USER_KEY = 'cyber_current_user';
+
+    if (localStorage.getItem(AUTH_KEY) !== 'active') {
+        window.location.href = 'login.html';
+    }
+
+    const currentUser = localStorage.getItem(CURRENT_USER_KEY) || 'guest';
+    const welcomeText = document.querySelector('.mb-8.bg-black\\/60');
+    if (welcomeText) {
+        welcomeText.textContent = `// WELCOME, ${currentUser.toUpperCase()}. Data Anda dipisah per akun agar admin dan user tidak saling berbagi data.`;
+    }
+
+    // --- ANIMASI BINER MATRIX RAIN (Disesuaikan ke Pink Stabilo) ---
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const binaryChars = '01';
+    const fontSize = 14;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#10b981'; // Diubah ke Pink Stabilo agar kelihatan kontras & sesuai tema
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = binaryChars.charAt(Math.floor(Math.random() * binaryChars.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    setInterval(drawMatrix, 50);
+
+    // --- SYSTEM LOGOUT ---
+    function logoutSystem() {
+        const keysToClear = [
+            AUTH_KEY,
+            CURRENT_USER_KEY,
+            'cyber_user_role',
+            'cyber_users'
+        ];
+
+        keysToClear.forEach((key) => localStorage.removeItem(key));
+        window.location.replace('login.html');
+    }
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logoutSystem);
+    }
+</script>
+</body>
+</html>

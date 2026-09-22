@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER_BACKLOG // Roadmap</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body { font-family: 'Fira Code', monospace; }
+        #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.25; }
+    </style>
+</head>
+<body class="bg-black text-amber-400 min-h-screen flex flex-col items-center py-10 px-4 relative overflow-x-hidden">
+
+    <canvas id="matrixCanvas"></canvas>
+
+    <div class="w-full max-w-xl bg-zinc-950/90 border-2 border-amber-500/40 rounded-none shadow-[0_0_20px_rgba(245,158,11,0.15)] p-6 md:p-8 relative z-10 backdrop-blur-sm">
+        
+        <!-- NAVBAR -->
+        <nav class="border-b border-amber-500/30 pb-4 mb-6 flex flex-wrap justify-between items-center text-xs">
+            <span class="font-bold tracking-widest text-amber-400">[NAV_SYSTEM]</span>
+            <div class="flex flex-wrap gap-2">
+                <a href="index.html" class="px-2.5 py-1 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-black transition"><i class="fa-solid fa-house-user"></i> Hub</a>
+                <a href="game.html" class="px-2.5 py-1 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500 hover:text-black transition"><i class="fa-solid fa-gamepad"></i> Game</a>
+                <a href="dev.html" class="px-2.5 py-1 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500 hover:text-black transition"><i class="fa-solid fa-laptop"></i> Dev</a>
+                <a href="workout.html" class="px-2.5 py-1 border border-pink-500/30 text-pink-400 hover:bg-pink-500 hover:text-black transition"><i class="fa-solid fa-dumbbell"></i> Workout</a>
+                <a href="study.html" class="px-2.5 py-1 bg-amber-500 text-black font-bold"><i class="fa-solid fa-book"></i> Roadmap</a>
+            </div>
+        </nav>
+
+        <header class="mb-6 border-b border-amber-500/30 pb-4 flex justify-between items-center">
+            <div>
+                <span class="text-xs text-amber-600 tracking-widest uppercase">[SYSTEM_ACTIVE]</span>
+                <h1 class="text-xl md:text-2xl font-bold tracking-wider text-amber-300 mt-1">>&nbsp;SKILL_ROADMAP BY MAZAW.db</h1>
+            </div>
+            <div class="text-right text-xs text-amber-600 hidden sm:block">SEC_LVL: 01<br>ONLINE</div>
+        </header>
+
+        <form id="studyForm" class="space-y-4 mb-8">
+            <div>
+                <label class="block text-xs uppercase tracking-widest text-amber-500 mb-1">Module / Topic to Learn</label>
+                <input type="text" id="studyTopic" placeholder="Advanced JavaScript Closures..." required
+                    class="w-full bg-black border border-amber-500/50 rounded-none px-4 py-2.5 text-sm text-amber-300 placeholder-amber-900 focus:outline-none focus:border-amber-400">
+            </div>
+            <div>
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-black font-bold py-3 rounded-none text-sm tracking-wider uppercase transition cursor-pointer">
+                    [ + ] Add to Roadmap
+                </button>
+            </div>
+        </form>
+
+        <div>
+            <div class="flex justify-between items-center mb-4 border-b border-amber-500/20 pb-2">
+                <h2 class="text-sm font-semibold text-amber-400 tracking-wider uppercase">Knowledge Base [<span id="totalStudy">0</span>]</h2>
+            </div>
+            <ul id="studyList" class="space-y-3 max-h-[350px] overflow-y-auto pr-1"></ul>
+            <div id="studyEmpty" class="text-center py-10 text-amber-800 text-xs tracking-widest hidden">// NO STUDY TOPICS RECORDED.</div>
+        </div>
+    </div>
+
+    <script>
+        const AUTH_KEY = 'cyber_user_session';
+        const CURRENT_USER_KEY = 'cyber_current_user';
+        function getUserStorageKey(baseKey) {
+            return `${baseKey}_${localStorage.getItem(CURRENT_USER_KEY) || 'guest'}`;
+        }
+
+        if (localStorage.getItem(AUTH_KEY) !== 'active') {
+            window.location.href = 'login.html';
+        }
+
+        const canvas = document.getElementById('matrixCanvas'), ctx = canvas.getContext('2d');
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+        const binaryChars = '01', fontSize = 14;
+        let columns = Math.floor(canvas.width / fontSize), drops = Array(columns).fill(1);
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.08)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#f59e0b'; ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < drops.length; i++) {
+                ctx.fillText(binaryChars.charAt(Math.floor(Math.random() * binaryChars.length)), i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+
+        const form = document.getElementById('studyForm'), topicInput = document.getElementById('studyTopic'), list = document.getElementById('studyList'), total = document.getElementById('totalStudy'), empty = document.getElementById('studyEmpty');
+        let studies = JSON.parse(localStorage.getItem(getUserStorageKey('cyber_studies'))) || [];
+
+        function render() {
+            list.innerHTML = ''; total.textContent = studies.length;
+            if (studies.length === 0) { empty.classList.remove('hidden'); return; }
+            empty.classList.add('hidden');
+            studies.forEach((s, i) => {
+                const li = document.createElement('li');
+                li.className = "flex justify-between items-center bg-black/80 border border-amber-500/30 p-4 transition";
+                li.innerHTML = `<h3 class="font-semibold text-amber-200 text-sm">> ${escapeHtml(s.topic)}</h3><button onclick="del(${i})" class="text-amber-700 hover:text-red-500 p-2 cursor-pointer">[X]</button>`;
+                list.appendChild(li);
+            });
+        }
+        form.addEventListener('submit', e => { e.preventDefault(); studies.push({ topic: topicInput.value.trim() }); saveAndRender(); form.reset(); });
+        window.del = i => { studies.splice(i, 1); saveAndRender(); }
+        function saveAndRender() { localStorage.setItem(getUserStorageKey('cyber_studies'), JSON.stringify(studies)); render(); }
+        function escapeHtml(str) { return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+        render();
+    </script>
+</body>
+</html>
