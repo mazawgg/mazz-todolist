@@ -40,7 +40,7 @@
         </form>
 
         <div class="mt-5 text-xs text-emerald-700 border-t border-emerald-500/20 pt-4">
-            Butuh Akses? Hubungi <span class="text-emerald-400 font-bold">mazawgg.07@gmail.com</span> untuk mendapatkan kredensial.
+            Butuh Akses? Silahkan <span class="text-emerald-400 font-bold">inspect</span> untuk mendapatkan kredensial.
         </div>
 
         <div id="loginError" class="mt-4 hidden text-xs text-red-400 border border-red-500/30 bg-red-500/10 p-3">
@@ -55,7 +55,7 @@
 
     if (!localStorage.getItem(USERS_DB_KEY)) {
         const defaultUsers = [
-            { username: 'mazaw', password: 'cyber123', role: 'mazaw' },
+            { username: 'user', password: 'cyber123', role: 'user' },
             { username: 'admin', password: 'adminpassword', role: 'admin' }
         ];
         localStorage.setItem(USERS_DB_KEY, JSON.stringify(defaultUsers));
